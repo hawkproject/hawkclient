@@ -6,23 +6,27 @@ namespace Hawk
 {
 	HAKW_SINGLETON_IMPL(MsgManager);
 
-	HawkMsgManager::HawkMsgManager() : m_pMsgPump(0)
+	HawkMsgManager::HawkMsgManager()
 	{
 	}
 
 	HawkMsgManager::~HawkMsgManager()
 	{		
-		m_mReg.clear();
-		HAWK_RELEASE(m_pMsgPump);
+		m_mRegMsg.clear();
+	}
+
+	Bool HawkMsgManager::Tick(UInt32 iPeriod)
+	{		
+		return HawkManagerBase::Tick(iPeriod);
 	}
 
 	Bool HawkMsgManager::Register(Int32 iMsg)
 	{
-		MsgRegMap::iterator it = m_mReg.find(iMsg);
-		HawkAssert(it == m_mReg.end());
-		if (it == m_mReg.end())
+		MsgRegMap::iterator it = m_mRegMsg.find(iMsg);
+		HawkAssert(it == m_mRegMsg.end());
+		if (it == m_mRegMsg.end())
 		{
-			m_mReg[iMsg] = iMsg;
+			m_mRegMsg[iMsg] = iMsg;
 			return true;
 		}
 		return false;
@@ -32,8 +36,8 @@ namespace Hawk
 	{
 		vMsgIds.clear();
 
-		MsgRegMap::iterator it = m_mReg.begin();
-		for (;it!=m_mReg.end();it++)
+		MsgRegMap::iterator it = m_mRegMsg.begin();
+		for (;it!=m_mRegMsg.end();it++)
 		{
 			vMsgIds.push_back(it->first);
 		}
@@ -61,61 +65,6 @@ namespace Hawk
 			}			
 			
 			return true;
-		}
-		return false;
-	}
-
-	Bool HawkMsgManager::InitMsgPump(Bool bThreadSafe)
-	{
-		if (!m_pMsgPump)
-		{
-			m_pMsgPump = new HawkMsgPump(bThreadSafe);
-			return true;
-		}
-		return false;
-	}
-
-	Bool HawkMsgManager::AddMsgListener(Int32 iMsg, const HawkMsgListener* pListener)
-	{
-		if (m_pMsgPump)
-		{
-			return m_pMsgPump->AddMsgListener(iMsg, pListener);
-		}
-		return false;
-	}
-
-	Bool HawkMsgManager::PostMsg(HawkMsg* pMsg)
-	{
-		if (m_pMsgPump)
-		{
-			return m_pMsgPump->PostMsg(pMsg);
-		}
-		return false;
-	}
-
-	Bool HawkMsgManager::SendMsg(HawkMsg* pMsg)
-	{
-		if (m_pMsgPump)
-		{
-			return m_pMsgPump->SendMsg(pMsg);
-		}
-		return false;
-	}
-
-	Bool HawkMsgManager::DispatchAllMsg()
-	{
-		if (m_pMsgPump)
-		{
-			return m_pMsgPump->DispatchAllMsg();
-		}
-		return false;
-	}
-
-	Bool HawkMsgManager::RemoveMsgListener(Int32 iMsg, const HawkMsgListener* pListener)
-	{
-		if (m_pMsgPump)
-		{
-			return m_pMsgPump->RemoveMsgListener(iMsg, pListener);
 		}
 		return false;
 	}

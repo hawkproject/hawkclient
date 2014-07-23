@@ -127,31 +127,40 @@ namespace Hawk
 		return 0;
 	}	
 
+	//采用 AP Hash算法
 	UInt32  HawkOSOperator::CalcCrc(const UChar* pData, UInt32 iSize, UInt32* pCrc)
 	{
-		UInt32 iCRC = 0;
+		UInt32 iCrc = 0;
 		if (pCrc)
-			iCRC = *pCrc;
+			iCrc = *pCrc;
 
-		UChar* pBuf = (UChar*)pData;
-		while (iSize-- != 0)
+		for (UInt32 i = 0; i < iSize; i++) 
 		{
-			for (UInt32 i=0x80;i;i >>= 1)
-			{
-				iCRC <<= 1;
-				if(iCRC & 0x8000)
-					iCRC ^= 0x1021;
-
-				if(*pBuf & i)
-					iCRC ^= 0x1021;
-			}
-			pBuf++;
+			iCrc ^= ((i & 1) == 0) ? ((iCrc << 7) ^ pData[i] ^ (iCrc >> 3)) : (~((iCrc << 11) ^ pData[i] ^ (iCrc >> 5)));
 		}
 
 		if (pCrc)
-			*pCrc = iCRC;
+			*pCrc = iCrc;
 
-		return iCRC;
+		return iCrc;
+
+		/*Mysql Hash 算法
+		UInt32 iCrc = 1, iSeed = 4;
+		if (pCrc)
+			iCrc = *pCrc;
+
+		for (UInt32 i = 0; i < iSize; i++) 
+		{
+			iCrc  ^= (((iCrc & 63) + iSeed)*(pData[i]))+ (iCrc << 8);
+			iSeed += 3;
+			iCrc ^= ((i & 1) == 0) ? ((iCrc << 7) ^ pData[i] ^ (iCrc >> 3)) : (~((iCrc << 11) ^ pData[i] ^ (iCrc >> 5)));
+		}
+
+		if (pCrc)
+			*pCrc = iCrc;
+
+		return iCrc;		
+		*/
 	}
 
 	UInt32 HawkOSOperator::CalcFileCrc(const AString& sFile)

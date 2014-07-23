@@ -24,6 +24,11 @@ namespace Hawk
 		return 0;
 	}
 
+	Int64 HawkFile::ReadLine(void* pData, Int64 iBufSize, UChar cSeparate)
+	{
+		return 0;
+	}
+
 	Int64 HawkFile::Write(const void* pData, Int64 iSize, Bool bFlush)
 	{
 		return 0;

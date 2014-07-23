@@ -109,6 +109,28 @@ namespace Hawk
 		return iSize;
 	}
 
+	Int64 HawkMemoryFile::ReadLine(void* pData, Int64 iBufSize, UChar cSeparate)
+	{
+		Int64 iRead = 0;
+		UChar cRead = 0;
+
+		while (pData && iRead <= iBufSize && cRead != cSeparate)
+		{
+			UChar* pTmp = (UChar*)pData + iRead;
+			Int64  iTmp = Read(&cRead,1);
+			if(iTmp == 1)
+			{
+				*pTmp = cRead;
+				iRead++;
+			}
+			else
+			{
+				break;
+			}
+		}
+		return iRead;
+	}
+
 	Int64 HawkMemoryFile::Write(const void* pData, Int64 iSize, Bool bFlush)
 	{
 		if (!pData || iSize <= 0 || (m_eOpenType != OPEN_WRITE && m_eOpenType != OPEN_RW && m_eOpenType != OPEN_APPEND) )

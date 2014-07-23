@@ -139,8 +139,8 @@ namespace Hawk
 			else
 				m_sIPv4Addr.s_addr = inet_addr(sIpAddr.c_str());
 
-			if (m_sIPv4Addr.s_addr != INADDR_NONE)
-				return true;
+			//if (m_sIPv4Addr.s_addr != INADDR_NONE)
+			return true;
 		}
 		else
 		{

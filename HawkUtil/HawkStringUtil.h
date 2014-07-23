@@ -408,7 +408,7 @@ namespace Hawk
 		}
 
 	public:
-		//Hash算法
+		//字符串Hash算法
 		static UInt32  CalcHash(const Char * pData, Size_t iSize);
 
 		//转换为UTF8编码

@@ -36,20 +36,7 @@ namespace Hawk
 	Bool HawkProtocolManager::RegSysProtocol()
 	{
 		//注册系统内部协议
-		REGISTER_PROTO(SysProtocol::Sys_MsgNotify);
-		REGISTER_PROTO(SysProtocol::Sys_ErrNotify);
-		REGISTER_PROTO(SysProtocol::Sys_HeartBeat);
-		REGISTER_PROTO(SysProtocol::Sys_HeartBreak);
-		REGISTER_PROTO(SysProtocol::Sys_SessionStart);
-		REGISTER_PROTO(SysProtocol::Sys_SessionBreak);
-		REGISTER_PROTO(SysProtocol::Sys_CloseSession);
-		REGISTER_PROTO(SysProtocol::Sys_LogMsg);
-		REGISTER_PROTO(SysProtocol::Sys_ProfReq);
-		REGISTER_PROTO(SysProtocol::Sys_ProfInfo);
-		REGISTER_PROTO(SysProtocol::Sys_RefuseConn);
-		REGISTER_PROTO(SysProtocol::Sys_CltPing);
-		REGISTER_PROTO(SysProtocol::Sys_SvrPong);
-		REGISTER_PROTO(SysProtocol::Sys_Octets);
+		#include "HawkSysProtocolReg.inl"
 
 		return true;
 	}

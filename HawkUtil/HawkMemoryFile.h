@@ -31,6 +31,7 @@ namespace Hawk
 		//打开内存文件
 		virtual Bool     Open(Int64 iSize, OpenType eOpen = OPEN_WRITE);
 
+		//从内存打开文件
 		virtual Bool     Open(void* pData, Int64 iSize, Bool bExtra, OpenType eOpen = OPEN_READ);
 
 		//打开文件读入内存
@@ -38,6 +39,9 @@ namespace Hawk
 
 		//读取文件内容,pData为存储的空间,iSize为读取字节数
 		virtual Int64	 Read(void* pData, Int64 iSize);
+
+		//读一行
+		virtual Int64    ReadLine(void* pData, Int64 iBufSize, UChar cSeparate = '\n');
 
 		//写文件,pData为写入的内容,iSize为写的字节数
 		virtual Int64	 Write(const void* pData, Int64 iSize, Bool bFlush = false);

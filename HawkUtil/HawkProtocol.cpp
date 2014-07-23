@@ -2,11 +2,13 @@
 #include "HawkOSOperator.h"
 #include "HawkLoggerManager.h"
 #include "HawkProtocolManager.h"
+#include "HawkStringUtil.h"
 
 namespace Hawk
 {
-	HawkProtocol::HawkProtocol(ProtoType iType, UInt8 iDrive) : m_iType(iType), m_iSize(0), m_iCrc(0), m_iDrive(iDrive)
+	HawkProtocol::HawkProtocol(ProtoType iType, UInt8 iDrive, const AString& sStates) : m_iType(iType), m_iSize(0), m_iCrc(0), m_iDrive(iDrive)
 	{
+		SetProtoStates(sStates);
 	}
 
 	HawkProtocol::~HawkProtocol()
@@ -31,6 +33,16 @@ namespace Hawk
 	UInt8 HawkProtocol::GetDrive() const
 	{
 		return m_iDrive;
+	}
+
+	Bool HawkProtocol::IsStateSuitable(Int32 iState) const
+	{
+		if (m_mStates.size())
+		{
+			return m_mStates.find(iState) != m_mStates.end();
+		}
+
+		return true;
 	}
 
 	Bool HawkProtocol::GetDecodeOS(OctetsStream*& pOS)
@@ -144,5 +156,17 @@ namespace Hawk
 		}
 
 		return true;
+	}
+
+	void HawkProtocol::SetProtoStates(const AString& sStates)
+	{
+		AStringVector asv;
+		HawkStringUtil::Split<AString>(sStates, asv, ",");
+		for (Size_t i=0;i<asv.size();i++)
+		{
+			HawkStringUtil::Trim<AString>(asv[i]);
+			Int32 iState = HawkStringUtil::StringToInt<AString>(asv[i]);
+			m_mStates[iState] = iState;
+		}
 	}
 }

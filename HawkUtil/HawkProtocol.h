@@ -19,9 +19,11 @@ namespace Hawk
 			DRIVE_STATE,		//状态(改变发送)
 		};
 
+		typedef map<Int32, Int32> ProtoStates;
+
 	public:
 		//协议构造
-		HawkProtocol(ProtoType iType = 0, UInt8 iDrive = DRIVE_EVENT);
+		HawkProtocol(ProtoType iType = 0, UInt8 iDrive = DRIVE_EVENT, const AString& sStates = "");
 
 		//协议析构
 		virtual ~HawkProtocol();				
@@ -53,9 +55,15 @@ namespace Hawk
 		//获取驱动模式
 		UInt8		  GetDrive() const;
 
+		//获取适应场景
+		Bool		  IsStateSuitable(Int32 iState) const;
+
 	protected:
 		//自解析,默认情况下会自解析
 		virtual Bool  DecodeSelf();
+
+		//设置协议适合场景列表
+		virtual void  SetProtoStates(const AString& sStates);
 
 	protected:
 		//类型
@@ -68,6 +76,8 @@ namespace Hawk
 		UInt8		 m_iDrive;
 		//数据存储器
 		OctetsStream m_sDecode;
+		//使用状态
+		ProtoStates  m_mStates;
 	};
 
 	//协议类型简便定义

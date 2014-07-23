@@ -4,9 +4,6 @@
     <Filter Include="import">
       <UniqueIdentifier>{77ee7e70-09a7-43db-b725-446fb12abb2d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="import\tinyxml">
-      <UniqueIdentifier>{302339b6-517a-494f-b783-cdb28c156fb3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="import\zlib">
       <UniqueIdentifier>{84307a86-507d-4ab7-ab2c-bf5836e1ad20}</UniqueIdentifier>
     </Filter>
@@ -78,6 +75,15 @@
     </Filter>
     <Filter Include="algorithm">
       <UniqueIdentifier>{dbfd5a89-38b3-4d23-b84e-982d008d4f61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="protocol">
+      <UniqueIdentifier>{f2868729-0bb2-4871-aff4-e25d5bd7b638}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="protocol\sysprotocol">
+      <UniqueIdentifier>{354bc207-d833-4e61-93d5-469ebf41de30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="filesender">
+      <UniqueIdentifier>{af8886a0-2953-49c7-ad93-59d957d6ef1a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -225,12 +231,6 @@
     <ClInclude Include="..\HawkIPAddr.h">
       <Filter>network</Filter>
     </ClInclude>
-    <ClInclude Include="..\HawkProtocolManager.h">
-      <Filter>network</Filter>
-    </ClInclude>
-    <ClInclude Include="..\HawkProtocol.h">
-      <Filter>network</Filter>
-    </ClInclude>
     <ClInclude Include="..\HawkRWEFds.h">
       <Filter>network</Filter>
     </ClInclude>
@@ -246,13 +246,7 @@
     <ClInclude Include="..\HawkSocketPair.h">
       <Filter>network</Filter>
     </ClInclude>
-    <ClInclude Include="..\HawkSysProtocol.h">
-      <Filter>network</Filter>
-    </ClInclude>
     <ClInclude Include="..\HawkCounter.h">
-      <Filter>math</Filter>
-    </ClInclude>
-    <ClInclude Include="..\HawkHash.h">
       <Filter>math</Filter>
     </ClInclude>
     <ClInclude Include="..\HawkMath.h">
@@ -294,23 +288,38 @@
     <ClInclude Include="..\HawkMsgPump.h">
       <Filter>msg</Filter>
     </ClInclude>
+    <ClInclude Include="..\HawkProtocolPump.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\HawkProtocol.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\HawkProtocolListener.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\HawkProtocolManager.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\HawkSysErrorCode.h">
+      <Filter>protocol\sysprotocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\HawkSysProtocolId.h">
+      <Filter>protocol\sysprotocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\HawkSysProtocol.h">
+      <Filter>protocol\sysprotocol</Filter>
+    </ClInclude>
     <ClInclude Include="..\HawkFileSender.h">
+      <Filter>filesender</Filter>
+    </ClInclude>
+    <ClInclude Include="..\HawkXorSecurity.h">
+      <Filter>security</Filter>
+    </ClInclude>
+    <ClInclude Include="..\HawkKVFile.h">
       <Filter>file</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\source\tinyxml\tinystr.cpp">
-      <Filter>import\tinyxml</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\tinyxml\tinyxml.cpp">
-      <Filter>import\tinyxml</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\tinyxml\tinyxmlerror.cpp">
-      <Filter>import\tinyxml</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\tinyxml\tinyxmlparser.cpp">
-      <Filter>import\tinyxml</Filter>
-    </ClCompile>
     <ClCompile Include="..\source\zlib\adler32.c">
       <Filter>import\zlib</Filter>
     </ClCompile>
@@ -467,12 +476,6 @@
     <ClCompile Include="..\HawkIPAddr.cpp">
       <Filter>network</Filter>
     </ClCompile>
-    <ClCompile Include="..\HawkProtocol.cpp">
-      <Filter>network</Filter>
-    </ClCompile>
-    <ClCompile Include="..\HawkProtocolManager.cpp">
-      <Filter>network</Filter>
-    </ClCompile>
     <ClCompile Include="..\HawkRWEFds.cpp">
       <Filter>network</Filter>
     </ClCompile>
@@ -489,9 +492,6 @@
       <Filter>network</Filter>
     </ClCompile>
     <ClCompile Include="..\HawkCounter.cpp">
-      <Filter>math</Filter>
-    </ClCompile>
-    <ClCompile Include="..\HawkHash.cpp">
       <Filter>math</Filter>
     </ClCompile>
     <ClCompile Include="..\HawkMath.cpp">
@@ -524,14 +524,29 @@
     <ClCompile Include="..\HawkMsgPump.cpp">
       <Filter>msg</Filter>
     </ClCompile>
+    <ClCompile Include="..\HawkProtocol.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\HawkProtocolListener.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\HawkProtocolManager.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\HawkProtocolPump.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
     <ClCompile Include="..\HawkFileSender.cpp">
+      <Filter>filesender</Filter>
+    </ClCompile>
+    <ClCompile Include="..\HawkXorSecurity.cpp">
+      <Filter>security</Filter>
+    </ClCompile>
+    <ClCompile Include="..\HawkKVFile.cpp">
       <Filter>file</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\source\tinyxml\Makefile">
-      <Filter>import\tinyxml</Filter>
-    </None>
     <None Include="..\source\zlib\Makefile">
       <Filter>import\zlib</Filter>
     </None>
@@ -540,6 +555,9 @@
     </None>
     <None Include="..\source\sqlite\Makefile">
       <Filter>import\sqlite</Filter>
+    </None>
+    <None Include="..\HawkSysProtocolReg.inl">
+      <Filter>protocol\sysprotocol</Filter>
     </None>
   </ItemGroup>
 </Project>

@@ -25,11 +25,11 @@
     <ClInclude Include="..\HawkFileSender.h" />
     <ClInclude Include="..\HawkFolder.h" />
     <ClInclude Include="..\HawkGateSecurity.h" />
-    <ClInclude Include="..\HawkHash.h" />
     <ClInclude Include="..\HawkHeapArray.h" />
     <ClInclude Include="..\HawkHMACSHA1Security.h" />
     <ClInclude Include="..\HawkIPAddr.h" />
     <ClInclude Include="..\HawkJson.h" />
+    <ClInclude Include="..\HawkKVFile.h" />
     <ClInclude Include="..\HawkLogger.h" />
     <ClInclude Include="..\HawkLoggerManager.h" />
     <ClInclude Include="..\HawkMalloc.h" />
@@ -50,7 +50,9 @@
     <ClInclude Include="..\HawkPackage.h" />
     <ClInclude Include="..\HawkParamVector.h" />
     <ClInclude Include="..\HawkProtocol.h" />
+    <ClInclude Include="..\HawkProtocolListener.h" />
     <ClInclude Include="..\HawkProtocolManager.h" />
+    <ClInclude Include="..\HawkProtocolPump.h" />
     <ClInclude Include="..\HawkRand.h" />
     <ClInclude Include="..\HawkRC4Security.h" />
     <ClInclude Include="..\HawkRefCounter.h" />
@@ -68,7 +70,9 @@
     <ClInclude Include="..\HawkStdHeader.h" />
     <ClInclude Include="..\HawkStreamCompress.h" />
     <ClInclude Include="..\HawkStringUtil.h" />
+    <ClInclude Include="..\HawkSysErrorCode.h" />
     <ClInclude Include="..\HawkSysProtocol.h" />
+    <ClInclude Include="..\HawkSysProtocolId.h" />
     <ClInclude Include="..\HawkTask.h" />
     <ClInclude Include="..\HawkThread.h" />
     <ClInclude Include="..\HawkTimerManager.h" />
@@ -79,6 +83,7 @@
     <ClInclude Include="..\HawkXmlDocument.h" />
     <ClInclude Include="..\HawkXmlElement.h" />
     <ClInclude Include="..\HawkXmlFile.h" />
+    <ClInclude Include="..\HawkXorSecurity.h" />
     <ClInclude Include="..\HawkZipReader.h" />
     <ClInclude Include="..\HawkZlib.h" />
     <ClInclude Include="..\source\sqlite\sqlite3.h" />
@@ -94,10 +99,10 @@
     <ClCompile Include="..\HawkFileSender.cpp" />
     <ClCompile Include="..\HawkFolder.cpp" />
     <ClCompile Include="..\HawkGateSecurity.cpp" />
-    <ClCompile Include="..\HawkHash.cpp" />
     <ClCompile Include="..\HawkHMACSHA1Security.cpp" />
     <ClCompile Include="..\HawkIPAddr.cpp" />
     <ClCompile Include="..\HawkJson.cpp" />
+    <ClCompile Include="..\HawkKVFile.cpp" />
     <ClCompile Include="..\HawkLogger.cpp" />
     <ClCompile Include="..\HawkLoggerManager.cpp" />
     <ClCompile Include="..\HawkMalloc.cpp" />
@@ -118,7 +123,9 @@
     <ClCompile Include="..\HawkPackage.cpp" />
     <ClCompile Include="..\HawkParamVector.cpp" />
     <ClCompile Include="..\HawkProtocol.cpp" />
+    <ClCompile Include="..\HawkProtocolListener.cpp" />
     <ClCompile Include="..\HawkProtocolManager.cpp" />
+    <ClCompile Include="..\HawkProtocolPump.cpp" />
     <ClCompile Include="..\HawkRand.cpp" />
     <ClCompile Include="..\HawkRC4Security.cpp" />
     <ClCompile Include="..\HawkRefCounter.cpp" />
@@ -138,16 +145,13 @@
     <ClCompile Include="..\HawkTimerManager.cpp" />
     <ClCompile Include="..\HawkUtil.cpp" />
     <ClCompile Include="..\HawkXmlFile.cpp" />
+    <ClCompile Include="..\HawkXorSecurity.cpp" />
     <ClCompile Include="..\HawkZipReader.cpp" />
     <ClCompile Include="..\HawkZlib.cpp" />
     <ClCompile Include="..\source\json\json_reader.cpp" />
     <ClCompile Include="..\source\json\json_value.cpp" />
     <ClCompile Include="..\source\json\json_writer.cpp" />
     <ClCompile Include="..\source\sqlite\sqlite3.c" />
-    <ClCompile Include="..\source\tinyxml\tinystr.cpp" />
-    <ClCompile Include="..\source\tinyxml\tinyxml.cpp" />
-    <ClCompile Include="..\source\tinyxml\tinyxmlerror.cpp" />
-    <ClCompile Include="..\source\tinyxml\tinyxmlparser.cpp" />
     <ClCompile Include="..\source\zlib\adler32.c" />
     <ClCompile Include="..\source\zlib\compress.c" />
     <ClCompile Include="..\source\zlib\crc32.c" />
@@ -163,9 +167,9 @@
     <ClCompile Include="..\source\zlib\zutil.c" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\HawkSysProtocolReg.inl" />
     <None Include="..\source\json\Makefile" />
     <None Include="..\source\sqlite\Makefile" />
-    <None Include="..\source\tinyxml\Makefile" />
     <None Include="..\source\zlib\Makefile" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

@@ -3,6 +3,7 @@
 #include "HawkDiskFile.h"
 #include "HawkScope.h"
 #include "HawkZlib.h"
+#include "HawkOSOperator.h"
 
 namespace Hawk
 {
@@ -41,7 +42,7 @@ namespace Hawk
 			if (src_file.Read(pComData,iComSize) != iComSize)
 				return false;
 
-			if (iCrc != HawkStringUtil::CalcHash(pComData, (Size_t)iComSize))
+			if (iCrc != HawkOSOperator::CalcCrc((const UChar*)pComData, (UInt32)iComSize))
 				return false;
 
 			//做位反运算
@@ -77,7 +78,7 @@ namespace Hawk
 			UInt32 iCrc	   = *((UInt32*)pDataPtr);
 			pDataPtr	   += sizeof(UInt32);
 			Int64 iComSize = iSize - (Int64)(sizeof(iUnSize) + sizeof(iCrc));
-			if (iCrc != HawkStringUtil::CalcHash((const Char *)pDataPtr, (Size_t)iComSize))
+			if (iCrc != HawkOSOperator::CalcCrc((const UChar *)pDataPtr, (UInt32)iComSize))
 				return false;
 
 			//拷贝数据
@@ -151,7 +152,7 @@ namespace Hawk
 			pCompress[i] = (~pCompress[i]);
 
 		//压缩后的CRC校验
-		UInt32 iCrc = HawkStringUtil::CalcHash(pCompress, lComSize);
+		UInt32 iCrc = HawkOSOperator::CalcCrc((const UChar*)pCompress, (UInt32)lComSize);
 
 		HawkDiskFile com_file;
 		if (com_file.Open(sDstFile, HawkFile::OPEN_WRITE))

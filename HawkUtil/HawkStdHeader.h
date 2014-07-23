@@ -149,6 +149,14 @@ using namespace std;
 #	define CHECK_ERROR_CONNECT_REFUSED(e)   ((e) == ECONNREFUSED)
 #endif
 
+//命名空间开始宏
+#define HAWK_START_NAMESPACE(space) \
+	namespace space {
+
+//命名空间结束宏
+#define HAWK_CLOSE_NAMESPACE(space) \
+}
+
 /************************************************************************/
 /* Hawk常量定义                                                         */
 /************************************************************************/
@@ -338,8 +346,11 @@ using namespace std;
 #define SWAP_16(x)				( (((x)&0xFF) << 8) | (((x)&=0xFF00) >> 8) )
 #define SWAP_32(x)				( (((x)&0x000000FF)<<24) | (((x)&0xFF000000) >> 24) | (((x)&0x0000FF00) << 8) | (((x) &0x00FF0000) >> 8) )
 
-#define ARRAY_SIZE(arr)			( sizeof(arr) / sizeof((arr)[0]) )
 #define HAWKFOURCC(c0,c1,c2,c3) ( (UInt32)(UInt8)(c0) | ((UInt32)(UInt8)(c1) << 8) | ((UInt32)(UInt8)(c2) << 16) | ((UInt32)(UInt8)(c3) << 24 ) )
+
+#ifndef ARRAY_SIZE
+#	define ARRAY_SIZE(arr)		( sizeof(arr) / sizeof((arr)[0]) )
+#endif
 
 /************************************************************************/
 /* 管理器类定义宏                                                       */

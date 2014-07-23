@@ -1,5 +1,5 @@
 #include "HawkMsgListener.h"
-#include "HawkMsgManager.h"
+#include "HawkMsgPump.h"
 
 namespace Hawk
 {
@@ -9,15 +9,15 @@ namespace Hawk
 
 	HawkMsgListener::~HawkMsgListener()
 	{
-		RemoveMsg();
+		AbandonMsg();
 	}
 
-	Bool  HawkMsgListener::RegisterMsg(Int32 iMsg)
+	Bool  HawkMsgListener::MonitorMsg(Int32 iMsg)
 	{
-		if (m_mRegMsg.find(iMsg) == m_mRegMsg.end())
+		if (m_mMsgType.find(iMsg) == m_mMsgType.end())
 		{
-			m_mRegMsg[iMsg] = iMsg;
-			P_MsgManager->AddMsgListener(iMsg, this);
+			m_mMsgType[iMsg] = iMsg;
+			P_MsgPump->AddListener(iMsg, this);
 			return true;
 		}		
 		return false;
@@ -25,33 +25,33 @@ namespace Hawk
 
 	Bool  HawkMsgListener::OnMessage(const HawkMsg& sMsg)
 	{
-		if (m_mRegMsg.find(sMsg.Msg) != m_mRegMsg.end())
+		if (m_mMsgType.find(sMsg.Msg) != m_mMsgType.end())
 		{
 			return true;
 		}
 		return false;
 	}
 
-	Bool  HawkMsgListener::RemoveMsg(Int32 iMsg)
+	Bool  HawkMsgListener::AbandonMsg(Int32 iMsg)
 	{
 		if (iMsg)
 		{
-			RegMsgMap::iterator it = m_mRegMsg.find(iMsg);
-			if (it != m_mRegMsg.end())
+			MsgTypeMap::iterator it = m_mMsgType.find(iMsg);
+			if (it != m_mMsgType.end())
 			{
-				P_MsgManager->RemoveMsgListener(iMsg, this);
-				m_mRegMsg.erase(it);
+				P_MsgPump->RemoveListener(iMsg, this);
+				m_mMsgType.erase(it);
 				return true;
 			}
 		}
 		else
 		{
-			RegMsgMap::iterator it = m_mRegMsg.begin();
-			for (;it != m_mRegMsg.end();it++)
+			MsgTypeMap::iterator it = m_mMsgType.begin();
+			for (;it != m_mMsgType.end();it++)
 			{
-				P_MsgManager->RemoveMsgListener(it->first, this);
+				P_MsgPump->RemoveListener(it->first, this);
 			}
-			m_mRegMsg.clear();
+			m_mMsgType.clear();
 			return true;
 		}
 		return false;

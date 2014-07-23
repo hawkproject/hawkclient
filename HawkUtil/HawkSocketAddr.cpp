@@ -93,7 +93,7 @@ namespace Hawk
 			m_eFamily = IPAddr::IPv4;
 			memset(&m_sIPv4Addr, 0, sizeof(struct sockaddr_in));
 
-#ifdef IOS_LINUX
+#if defined(__APPLE__) || defined(__MACOSX__)
 			m_sIPv4Addr.sin_len	   = sizeof(struct sockaddr_in);
 #endif
 
@@ -106,8 +106,8 @@ namespace Hawk
 			m_eFamily = IPAddr::IPv6;
 			memset(&m_sIPv6Addr, 0, sizeof(struct sockaddr_in6));
 
-#ifdef IOS_LINUX
-			m_sIPv4Addr.sin_len	   = sizeof(struct sockaddr_in);
+#if defined(__APPLE__) || defined(__MACOSX__)
+			m_sIPv6Addr.sin_len	   = sizeof(struct sockaddr_in6);
 #endif
 
 			m_sIPv6Addr.sin6_family = AF_INET6;
